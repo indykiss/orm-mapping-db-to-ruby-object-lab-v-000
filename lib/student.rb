@@ -89,21 +89,20 @@ class Student
       SQL
     
      DB[:conn].execute(sql, x)
-    end  
+    end
     
   def self.first_student_in_grade_10
      sql = <<-SQL
-      SELECT * 
-       FROM students 
-       WHERE grade = 10
-       ORDER BY id 
-       LIMIT 1
+     SELECT *
+     FROM students
+     WHERE grade = 10
+     ORDER BY id
+     LIMIT 1
      SQL
-    
-     DB[:conn].execute(sql).collect do |row|
+     DB[:conn].execute(sql).map do |row|
        self.new_from_db(row)
-     end 
-    end 
+     end.first
+   end
     
     def self.all_students_in_grade_X(x)
      sql = <<-SQL
