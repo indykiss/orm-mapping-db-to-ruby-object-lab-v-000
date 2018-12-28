@@ -96,10 +96,11 @@ class Student
       SELECT * 
        FROM students 
        WHERE grade = 10
+       ORDER BY id 
        LIMIT 1
      SQL
     
-     DB[:conn].execute(sql)[0]
+     DB[:conn].execute(sql).collect do |row|
        self.new_from_db(row)
      
     end 
